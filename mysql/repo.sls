@@ -6,7 +6,7 @@ include:
 # Completely ignore non-RHEL based systems
 # TODO: Add Debian and Suse systems.
 # TODO: Allow user to specify MySQL version and alter yum repo file accordingly.
-{% if grains['os_family'] == 'RedHat' %}
+{% if grains['os_family'] == 'RedHat' and 'osmajorrelease' in grains %}
   {% if grains['osmajorrelease']|int == 5 %}
   {% set rpm_source = "http://repo.mysql.com/mysql57-community-release-el5.rpm" %}
   {% elif grains['osmajorrelease']|int == 6 %}
@@ -20,7 +20,7 @@ include:
 # A lookup table for MySQL Repo GPG keys & RPM URLs for various RedHat releases
   {% set pkg = {
     'key': 'http://repo.mysql.com/RPM-GPG-KEY-mysql',
-    'key_hash': 'md5=472a4a4867adfd31a68e8c9bbfacc23d',
+    'key_hash': 'md5=162ec8cb41add661b357e926a083b0cc',
     'rpm': rpm_source
  } %}
 
